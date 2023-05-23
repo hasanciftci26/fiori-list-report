@@ -1,0 +1,11 @@
+{
+  "authenticationMethod": "none",
+  "routes": [
+    {
+      "source": "^/personnel-management/(.*)$",
+      "destination": "backend-api",
+      "authenticationType": "none"
+    }
+  ],
+  "welcomeFile": "/ndbstraininglistreportui"
+}

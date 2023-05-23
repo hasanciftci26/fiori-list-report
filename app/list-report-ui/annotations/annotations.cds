@@ -77,6 +77,26 @@ annotate service.Personnels with @(UI: {
     ]
 });
 
+annotate service.PersonnelProjects with @(UI:{
+    SelectionFields  : [
+        projectID
+    ],
+    LineItem : [
+        {
+            $Type: 'UI.DataField',
+            Value: personnelNo
+        },
+        {
+            $Type: 'UI.DataField',
+            Value: projectID
+        },
+        {
+            $Type: 'UI.DataField',
+            Value: toProjects.name
+        }
+    ]
+});
+
 //--------------------------------------------- Object Page Section ------------------------------------------------------
 annotate service.Personnels with @(UI:{
     HeaderInfo  : {
@@ -109,5 +129,153 @@ annotate service.Personnels with @(UI:{
             Value : toDepartment.name
         },
         ImageUrl : 'https://cloudwuerdig.com/wp-content/uploads/2020/12/New-Project-9.png',
+    },
+    HeaderFacets  : [
+        {
+            $Type : 'UI.CollectionFacet',
+            Facets : [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Target : '@UI.FieldGroup#HeaderPersonalInfo',
+                    Label : 'Personal Information'
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Target : '@UI.FieldGroup#HeaderCompanyInfo',
+                    Label : 'Company Information'
+                }
+            ]
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target : '@UI.FieldGroup#HeaderBirthInfo',
+            Label : 'Birth Information'
+        }
+    ],
+    FieldGroup #HeaderPersonalInfo : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : firstName
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : lastName
+            }
+        ]
+    },
+    FieldGroup #HeaderCompanyInfo : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : companyCode
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : toCompany.name
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : toDepartment.name
+            }
+        ]
+    },
+    FieldGroup #HeaderBirthInfo : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : birthCity
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : birthCountry
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : birthDate
+            }
+        ]
+    },
+    Facets  : [
+        {
+            $Type : 'UI.CollectionFacet',
+            Label: 'Personnel Information',
+            Facets : [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Target : '@UI.FieldGroup#PersonalInformation',
+                    Label: 'Name - Surname'
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Target : '@UI.FieldGroup#BirthInformation',
+                    Label: 'Birth Information'
+                }
+            ]
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target : '@UI.FieldGroup#CompanyInformation',
+            Label : 'Company Information'
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target : 'toProjects/@UI.LineItem',
+            Label : 'Projects'
+        }
+    ],
+    FieldGroup #PersonalInformation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : firstName
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : lastName
+            }
+        ]
+    },
+    FieldGroup #BirthInformation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : birthDate
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : birthCountry
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : birthCity
+            }
+        ]
+    },
+    FieldGroup #CompanyInformation : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : companyCode
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : toCompany.name
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : departmentID
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : toDepartment.name
+            }
+        ]
     }
 });
